@@ -26,5 +26,11 @@
   "bugs": {
     "url": "https://github.com/NewEvolution/evernode/issues"
   },
-  "homepage": "https://github.com/NewEvolution/evernode#readme"
+  "homepage": "https://github.com/NewEvolution/evernode#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "favicon": "0.0.2",
+    "mongoose": "^4.4.4"
+  }
 }
