@@ -1,0 +1,26 @@
+{
+  "name": "evernode",
+  "description": "Web based Evernote-like written for Node.js",
+  "main": "server.js",
+  "authors": [
+    "Ryan Tanay <rtanay@gmail.com> (http://portfolio.ryantanay.com/)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "note",
+    "CRUD"
+  ],
+  "homepage": "https://github.com/NewEvolution/evernode",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}

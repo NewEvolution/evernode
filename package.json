@@ -29,6 +29,7 @@
   "homepage": "https://github.com/NewEvolution/evernode#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "bower": "^1.7.7",
     "express": "^4.13.4",
     "favicon": "0.0.2",
     "jade": "^1.11.0",

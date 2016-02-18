@@ -24,8 +24,6 @@ app.get('/notes/new', (req, res) => {
 });
 
 app.post('/notes', (req, res) => {
-  const body = req.body;
-  console.log('body', body); // eslint-disable-line no-console
   res.redirect('/');
 });
 
