@@ -16,6 +16,7 @@ const MONGO_PASS = process.env.MONGO_PASS || '';
 const MONGO_AUTH = MONGO_USER ? `${MONGO_USER}:${MONGO_PASS}@` : '';
 const MONGO_URL = `mongodb://${MONGO_AUTH}${MONGO_HOST}:${MONGO_PORT}/evernode`;
 
+const routes = require('./routes/');
 const app = express();
 
 app.locals.title = "Evernode";
@@ -26,28 +27,7 @@ app.use(bodyParser.json());
 
 app.set('view engine', 'jade');
 
-app.get('/notes/new', (req, res) => {
-  res.render('new-note');
-});
-
-const Note = mongoose.model('notes', mongoose.Schema({
-  title: String,
-  text: String
-}));
-
-app.get('/notes/:id', (req, res) => {
-  Note.findById(req.params.id, (err, note) => {
-    if (err) throw err;
-    res.render('show-note', {note: note})
-  });
-});
-
-app.post('/notes', (req, res) => {
-  Note.create(req.body, (err, note) => {
-    if (err) throw err;
-    res.redirect(`/notes/${note._id}`);
-  });
-});
+app.use(routes);
 
 app.get('/', (req, res) => {
   res.send('<h1>Yo</h1>');
