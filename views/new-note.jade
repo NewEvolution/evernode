@@ -1,11 +1,17 @@
 extends template
 block content
-  form(method='POST', action='/notes')
+  if note
+    h1 Edit Note
+  else
+    h1 New Note
+  - var item = note || {title: '', text: ''}
+  - var override = note ? '/' + note._id + '?_method=PUT' : ''
+  form(method='POST', action='/notes#{override}')
     .input-group
       label(for='title') Title
-      input#title(type='text', name='title')
+      input#title(type='text', name='title', placeholder='Note title', value='#{item.title}')
     .input-group
       label(for='text') Text
-      textarea#text(name='text')
+      textarea#text(name='text', placeholder='Note text')=item.text
     .input-group
-      input(type='submit', value='Create Note')
+      input(type='submit', value='Save Note')

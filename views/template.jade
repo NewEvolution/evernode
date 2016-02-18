@@ -2,7 +2,10 @@ doctype html
 html
   head
     title=title
+    link(rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css", type="text/css")
   body
     block content
     div.footer
       p &copy; Ryan Tanay #{year}
+    script(src="/vendor/jquery/dist/jquery.min.js")
+    script(src="/vendor/bootstrap/dist/js/bootstrap.min.js")

@@ -1,9 +1,11 @@
 'use strict';
 
+const path = require('path');
 const express = require('express');
 const favicon = require('favicon'); // eslint-disable-line no-unused-vars
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 const date = new Date();
 const localPort = 3000;
@@ -23,9 +25,11 @@ app.locals.title = "Evernode";
 app.locals.year = date.getFullYear();
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(methodOverride('_method'));
 
 app.set('view engine', 'jade');
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
