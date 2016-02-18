@@ -1,0 +1,11 @@
+extends template
+block content
+  form(method='POST', action='/notes')
+    .input-group
+      label(for='title') Title
+      input#title(type='text', name='title')
+    .input-group
+      label(for='text') Text
+      textarea#text(name='text')
+    .input-group
+      input(type='submit', value='Create Note')
