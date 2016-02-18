@@ -19,3 +19,6 @@ module.exports.createNote = (req, res) => {
     res.redirect(`/notes/${note._id}`);
   });
 };
+
+module.exports.deleteNote = (req, res) => { // eslint-disable-line no-unused-vars
+};
