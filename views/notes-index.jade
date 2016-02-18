@@ -1,0 +1,5 @@
+extends template
+block content
+  ul
+    for note in notes
+      li: a(href="/notes/#{note._id}")=note.title
