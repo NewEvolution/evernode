@@ -2,12 +2,16 @@
 
 const express = require('express');
 const favicon = require('favicon'); // eslint-disable-line no-unused-vars
-const mongoose = require('mongoose'); // eslint-disable-line no-unused-vars
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const date = new Date();
 const localPort = 3000;
-const port = process.env.port || localPort;
+const localMongoPort = 27017;
+const port = process.env.PORT || localPort;
+const MONGO_PORT = process.env.MONGO_PORT || localMongoPort;
+const MONGO_HOST = process.env.MONGO_HOST || 'localhost';
+const MONGO_URL = `mongodb://${MONGO_HOST}:${MONGO_PORT}/evernode`;
 
 const app = express();
 
@@ -23,14 +27,28 @@ app.get('/notes/new', (req, res) => {
   res.render('new-note');
 });
 
+const Note = mongoose.model('notes', mongoose.Schema({
+  title: String,
+  text: String
+}));
+
 app.post('/notes', (req, res) => {
-  res.redirect('/');
+  Note.create(req.body, (err, note) => {
+    if (err) throw err;
+    console.log(note); // eslint-disable-line no-console
+    res.redirect('/');
+  });
 });
 
 app.get('/', (req, res) => {
   res.send('<h1>Yo</h1>');
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`); // eslint-disable-line no-console
+mongoose.connect(MONGO_URL);
+
+mongoose.connection.on('open', err => {
+  if (err) throw err;
+  app.listen(port, () => {
+    console.log(`Listening on port ${port}`); // eslint-disable-line no-console
+  });
 });
