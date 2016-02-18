@@ -2,23 +2,44 @@
 
 const Note = require('../models/note');
 
-module.exports.newNote = (req, res) => {
-  res.render('new-note');
-};
+module.exports = {
+  index (req, res) {
+    Note.find({}).sort('-_id').exec((err, notes) => {
+      if (err) throw err;
+      res.render('notes-index', {notes: notes});
+    });
+  },
 
-module.exports.showNote = (req, res) => {
-  Note.findById(req.params.id, (err, note) => {
-    if (err) throw err;
-    res.render('show-note', {note: note})
-  });
-};
+  newNote (req, res) {
+    res.render('new-note');
+  },
 
-module.exports.createNote = (req, res) => {
-  Note.create(req.body, (err, note) => {
-    if (err) throw err;
-    res.redirect(`/notes/${note._id}`);
-  });
-};
+  showNote (req, res) {
+    res.render('show-note', {note: req.note})
+  },
 
-module.exports.deleteNote = (req, res) => { // eslint-disable-line no-unused-vars
-};
+  createNote (req, res) {
+    Note.create(req.body, err => {
+      if (err) throw err;
+      res.redirect('/notes');
+    });
+  },
+
+  editNote (req, res) {
+    res.render('new-note', {note: req.note})
+  },
+
+  updateNote (req, res) {
+    req.note.update(req.body, err => {
+      if (err) throw err;
+      res.redirect(`/notes/${req.note._id}`);
+    });
+  },
+
+  deleteNote (req, res) {
+    Note.findByIdAndRemove(req.params.id, err => {
+      if (err) throw err;
+      res.redirect('/notes');
+    })
+  }
+}
