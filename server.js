@@ -18,6 +18,7 @@ const MONGO_PASS = process.env.MONGO_PASS || '';
 const MONGO_AUTH = MONGO_USER ? `${MONGO_USER}:${MONGO_PASS}@` : '';
 const MONGO_URL = `mongodb://${MONGO_AUTH}${MONGO_HOST}:${MONGO_PORT}/evernode`;
 
+const logger = require('./lib/logger');
 const routes = require('./routes/');
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(methodOverride('_method'));
 app.set('view engine', 'jade');
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger);
 
 app.use(routes);
 
