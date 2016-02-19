@@ -44,7 +44,7 @@ app.use(logger);
 app.use(routes);
 
 app.get('/', (req, res) => {
-  res.send('<h1>Yo</h1>');
+  res.render('index');
 });
 
 mongoose.connect(MONGO_URL);
