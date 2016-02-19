@@ -1,0 +1,7 @@
+extends template
+block content
+  ul
+    for category in categories
+      li
+        a(href="/categories/#{category._id}")=category.name
+        span : #{category.desc}

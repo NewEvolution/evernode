@@ -1,0 +1,17 @@
+extends template
+block content
+  if category
+    h1 Edit Category
+  else
+    h1 New Category
+  - var item = category || {name: '', desc: ''}
+  - var override = category ? '/' + category._id + '?_method=PUT' : ''
+  form(method='POST', action='/categories#{override}')
+    .input-group
+      label(for='name') Name
+      input#name(type='text', name='name', placeholder='Category name', value='#{item.name}')
+    .input-group
+      label(for='desc') Description
+      input#name(type='text', name='desc', placeholder='Category description', value='#{item.desc}')
+    .input-group
+      input.btn.btn-default(type='submit', value='Save Category')

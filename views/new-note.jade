@@ -14,4 +14,9 @@ block content
       label(for='text') Text
       textarea#text(name='text', placeholder='Note text')=item.text
     .input-group
-      input(type='submit', value='Save Note')
+      label(for='cat') Category
+      select#cat(name='category')
+        for cat in categories
+          option(value=cat._id)= cat.name
+    .input-group
+      input.btn.btn-default(type='submit', value='Save Note')

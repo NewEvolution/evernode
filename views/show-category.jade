@@ -1,0 +1,10 @@
+extends template
+block content
+  h1=category.name
+  h3=category.desc
+  if category.notes != ''
+    ul
+      for note in category.notes
+        li: a(href='/notes/#{note._id}')=note.title
+  else
+    p This category contains no notes

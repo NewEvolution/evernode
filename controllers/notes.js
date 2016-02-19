@@ -1,6 +1,7 @@
 'use strict'
 
 const Note = require('../models/note');
+const Category = require('../models/category');
 
 module.exports = {
   index (req, res) {
@@ -10,33 +11,39 @@ module.exports = {
     });
   },
 
-  newNote (req, res) {
-    res.render('new-note');
+  new (req, res) {
+    Category.find({}, (err, categories) => {
+      if (err) throw err;
+      res.render('new-note', {categories: categories});
+    });
   },
 
-  showNote (req, res) {
+  show (req, res) {
     res.render('show-note', {note: req.note})
   },
 
-  createNote (req, res) {
+  create (req, res) {
     Note.create(req.body, err => {
       if (err) throw err;
       res.redirect('/notes');
     });
   },
 
-  editNote (req, res) {
-    res.render('new-note', {note: req.note})
+  edit (req, res) {
+    Category.find({}, (err, categories) => {
+      if (err) throw err;
+      res.render('new-note', {note: req.note, categories: categories})
+    });
   },
 
-  updateNote (req, res) {
+  update (req, res) {
     req.note.update(req.body, err => {
       if (err) throw err;
       res.redirect(`/notes/${req.note._id}`);
     });
   },
 
-  deleteNote (req, res) {
+  delete (req, res) {
     Note.findByIdAndRemove(req.params.id, err => {
       if (err) throw err;
       res.redirect('/notes');

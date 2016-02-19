@@ -3,8 +3,10 @@
 const express = require('express');
 const router = express.Router();
 
-const notesRoutes = require('./notes');
+const notesR = require('./notes');
+const categoriesR = require('./categories');
 
-router.use('/notes', notesRoutes);
+router.use('/notes', notesR);
+router.use('/categories', categoriesR);
 
 module.exports = router;

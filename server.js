@@ -5,6 +5,7 @@ const express = require('express');
 const favicon = require('favicon'); // eslint-disable-line no-unused-vars
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const nodeSass = require('node-sass-middleware');
 const methodOverride = require('method-override');
 
 const date = new Date();
@@ -27,6 +28,13 @@ app.locals.year = date.getFullYear();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
+
+app.use(nodeSass({
+  src: path.join(__dirname, 'public'),
+  dest: path.join(__dirname, 'public'),
+  indentedSyntax: true,
+  sourceMap: true
+}));
 
 app.set('view engine', 'jade');
 

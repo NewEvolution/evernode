@@ -1,8 +1,10 @@
 extends template
 block content
   h1=note.title
+  p
+    strong Category: 
+    a(href='/categories/#{note.category._id}')=note.category.name
   p=note.text
-  form(action='/notes/#{note._id}/edit')
-    input(type='submit', value='Edit Note')
   form(action='/notes/#{note._id}?_method=DELETE', method='POST')
-    input(type='submit', value='Delete Note')
+    input.btn.btn-default(type='submit', value='Delete Note')
+    a.btn.btn-default(href='/notes/#{note._id}/edit') Edit Note
