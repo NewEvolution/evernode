@@ -3,16 +3,22 @@ block content
   - var addy = email || ''
   - var pw = pass || ''
   if message
-    h1=message
+    div.bg-error=message
   form(method='POST' action="/register")
     .form-group
-      label(for='email') Email
-      input#email.form-control(type='email', name='email', value='#{addy}', autofocus, required)
+      label.sr-only(for='email') Email
+      .input-group
+        .input-group-addon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        input#email.form-control(type='email', name='email', value='#{addy}', required)
     .form-group
-      label(for='pass') Password
-      input#pass.form-control(type='password', name='password', value='#{pw}', required)
+      label.sr-only(for='pass') Password
+      .input-group
+        .input-group-addon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        input#pass.form-control(type='password', name='password', value='#{pw}', required)
     .form-group
-      label(for='repass') Repeat Password
-      input#repass.form-control(type='password', name='repassword', required)
+      label.sr-only(for='repass') Repeat Password
+      .input-group
+        .input-group-addon Repeat Password
+        input#repass.form-control(type='password', name='repassword', autofocus, required)
     .form-group
       input.btn.btn-default.form-control(type='submit', value='Register')

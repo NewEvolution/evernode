@@ -4,7 +4,7 @@ block content
     small  A note taking app in Node.js
   each msgs, type in messages
     for msg in msgs
-      h3(class='bg-#{type}')=msg
+      div(class='bg-#{type}')=msg
   form(method='POST' action='/login')
     .form-group
       label.sr-only(for='email') Email
