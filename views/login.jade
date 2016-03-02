@@ -1,0 +1,21 @@
+extends template
+block content
+  h1=title
+    small  A note taking app in Node.js
+  each msgs, type in messages
+    for msg in msgs
+      h3(class='bg-#{type}')=msg
+  form(method='POST' action='/login')
+    .form-group
+      label.sr-only(for='email') Email
+      .input-group
+        .input-group-addon &nbsp;&nbsp;&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;
+        input#email.form-control(type='email', name='email', autofocus, required)
+    .form-group
+      label.sr-only(for='pass') Password
+      .input-group
+        .input-group-addon Password
+        input#pass.form-control(type='password', name='password', required)
+    .form-group
+      input.btn.btn-default.btn-main.left(type='submit', value='Login')
+      button.btn.btn-default.btn-main.right(formaction='/register?_method=put') Register

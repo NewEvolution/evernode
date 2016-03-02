@@ -7,22 +7,23 @@ module.exports = {
   index (req, res) {
     Note.find({}).sort('-_id').exec((err, notes) => {
       if (err) throw err;
-      res.render('notes-index', {notes: notes});
+      res.render('note-index', {notes: notes});
     });
   },
 
   new (req, res) {
     Category.find({}, (err, categories) => {
       if (err) throw err;
-      res.render('new-note', {categories: categories});
+      res.render('note-new', {categories: categories});
     });
   },
 
   show (req, res) {
-    res.render('show-note', {note: req.note})
+    res.render('note-show', {note: req.note})
   },
 
   create (req, res) {
+    req.body.user = req.user._id;
     Note.create(req.body, err => {
       if (err) throw err;
       res.redirect('/notes');
@@ -32,7 +33,7 @@ module.exports = {
   edit (req, res) {
     Category.find({}, (err, categories) => {
       if (err) throw err;
-      res.render('new-note', {note: req.note, categories: categories})
+      res.render('note-new', {note: req.note, categories: categories})
     });
   },
 
