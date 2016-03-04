@@ -58,12 +58,9 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 
 const routes = require('./routes/');
-const user = require('./routes/user');
+app.use(routes);
+
 app.get('*', (req, res) => {
-  app.use(user);
-  if (req.user) {
-    app.use(routes);
-  }
   res.render('login');
 });
 

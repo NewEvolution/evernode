@@ -6,5 +6,5 @@ block content
     a(href='/categories/#{note.category._id}')=note.category.name
   p=note.text
   form(action='/notes/#{note._id}?_method=DELETE', method='POST')
-    input.btn.btn-default(type='submit', value='Delete Note')
-    a.btn.btn-default(href='/notes/#{note._id}/edit') Edit Note
+    input.btn.btn-default.btn-dbl(type='submit', value='Delete Note')
+    a.btn.btn-default.btn-dbl(href='/notes/#{note._id}/edit') Edit Note

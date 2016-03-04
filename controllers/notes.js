@@ -18,16 +18,16 @@ module.exports = {
     });
   },
 
-  show (req, res) {
-    res.render('note-show', {note: req.note})
-  },
-
   create (req, res) {
     req.body.user = req.user._id;
     Note.create(req.body, err => {
       if (err) throw err;
       res.redirect('/notes');
     });
+  },
+
+  show (req, res) {
+    res.render('note-show', {note: req.note})
   },
 
   edit (req, res) {

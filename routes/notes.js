@@ -2,9 +2,10 @@
 
 const router = require('express').Router();
 
-const Note = require('../models/note');
-const noteC = require('../controllers/notes');
+const auth = require('../lib/auth');
+router.use(auth);
 
+const Note = require('../models/note');
 router.param('id', (req, res, next, id) => {
   Note
     .findById(id)
@@ -16,12 +17,13 @@ router.param('id', (req, res, next, id) => {
     });
 });
 
+const noteC = require('../controllers/notes');
 router.get('/', noteC.index)
       .get('/new', noteC.new)
+      .post('/', noteC.create)
       .get('/:id', noteC.show)
       .get('/:id/edit', noteC.edit)
       .put('/:id', noteC.update)
-      .delete('/:id', noteC.delete)
-      .post('/', noteC.create);
+      .delete('/:id', noteC.delete);
 
 module.exports = router;

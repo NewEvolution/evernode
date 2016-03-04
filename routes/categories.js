@@ -2,10 +2,11 @@
 
 const router = require('express').Router();
 
+const auth = require('../lib/auth');
+router.use(auth);
+
 const Note = require('../models/note');
 const Category = require('../models/category');
-const categoriesC = require('../controllers/categories');
-
 router.param('id', (req, res, next, id) => {
   Category.findById(id, (err, category) => {
     if (err) throw err;
@@ -18,9 +19,13 @@ router.param('id', (req, res, next, id) => {
   });
 });
 
+const categoriesC = require('../controllers/categories');
 router.get('/', categoriesC.index)
-      .post('/', categoriesC.create)
       .get('/new', categoriesC.new)
-      .get('/:id', categoriesC.show);
+      .post('/', categoriesC.create)
+      .get('/:id', categoriesC.show)
+      .get('/:id/edit', categoriesC.edit)
+      .put('/:id', categoriesC.update)
+      .delete('/:id', categoriesC.delete);
 
 module.exports = router;

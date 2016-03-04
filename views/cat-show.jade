@@ -1,7 +1,10 @@
 extends template
 block content
   h1=category.name
-  h3=category.desc
+    small  #{category.desc}
+  form(action='/categories/#{category._id}?_method=DELETE', method='POST')
+    input.btn.btn-default.btn-dbl(type='submit', value='Delete Category')
+    a.btn.btn-default.btn-dbl(href='/categories/#{category._id}/edit') Edit Category
   if category.notes != ''
     ul
       for note in category.notes
