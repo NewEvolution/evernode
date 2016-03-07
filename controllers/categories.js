@@ -37,6 +37,10 @@ module.exports = {
     })
   },
 
-  delete (req, res) { // eslint-disable-line no-unused-vars
+  delete (req, res) {
+    Category.findByIdAndRemove(req.params.id, err => {
+      if (err) throw err;
+      res.redirect('/categories');
+    })
   }
 }

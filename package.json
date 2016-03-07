@@ -1,7 +1,7 @@
 {
   "name": "evernode",
   "version": "1.0.0",
-  "description": "Web based Evernote-like written for Node.js",
+  "description": "Web based note-taking app in Node.js",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
