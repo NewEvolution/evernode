@@ -3,7 +3,7 @@ block content
   - var addy = email || ''
   - var pw = pass || ''
   if message
-    div.bg-error=message
+    .bg-error=message
   form(method='POST' action="/register")
     .form-group
       label.sr-only(for='email') Email

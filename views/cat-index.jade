@@ -1,8 +1,8 @@
 extends template
 block content
-  ul
+  a.btn.btn-default.form-control(href="/categories/new") New category
+  ul.list-unstyled
     for category in categories
       li
         a(href="/categories/#{category._id}")=category.name
         span : #{category.desc}
-  a.btn.btn-default.form-control(href="/categories/new") New category

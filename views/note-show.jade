@@ -1,10 +1,12 @@
 extends template
 block content
-  h1=note.title
-  p
+  h1.text-center=note.title
+  hr
+  p=note.text
+  hr
+  p.text-center
     strong Category: 
     a(href='/categories/#{note.category._id}')=note.category.name
-  p=note.text
   form(action='/notes/#{note._id}?_method=DELETE', method='POST')
     input.btn.btn-default.btn-dbl(type='submit', value='Delete Note')
     a.btn.btn-default.btn-dbl(href='/notes/#{note._id}/edit') Edit Note

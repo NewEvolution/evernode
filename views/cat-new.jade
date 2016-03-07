@@ -1,17 +1,23 @@
 extends template
 block content
-  if category
-    h1 Edit Category
-  else
-    h1 New Category
   - var item = category || {name: '', desc: ''}
-  - var override = category ? '/' + category._id + '?_method=PUT' : ''
-  form(method='POST', action='/categories#{override}')
-    .input-group
-      label(for='name') Name
-      input#name(type='text', name='name', placeholder='Category name', value='#{item.name}')
-    .input-group
-      label(for='desc') Description
-      input#name(type='text', name='desc', placeholder='Category description', value='#{item.desc}')
-    .input-group
-      input.btn.btn-default(type='submit', value='Save Category')
+  - var catid = category ? '/' + category._id : ''
+  - var override = category ? '?_method=PUT' : ''
+  if category
+    h1.text-center Edit Category
+  else
+    h1.text-center New Category
+  form(method='POST', action='/categories#{catid}#{override}')
+    .form-group
+      label.sr-only(for='name') Name
+      .input-group
+        .input-group-addon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;
+        input#name.form-control(type='text', name='name', value='#{item.name}')
+    .form-group
+      label.sr-only(for='desc') Description
+      .input-group
+        .input-group-addon Description
+        input#name.form-control(type='text', name='desc', value='#{item.desc}')
+    .form-group
+      input.btn.btn-default.btn-dbl(type='submit', value='Save Category')
+      a.btn.btn-default.btn-dbl(href='/categories#{catid}') Cancel

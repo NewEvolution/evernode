@@ -1,22 +1,30 @@
 extends template
 block content
-  if note
-    h1 Edit Note
-  else
-    h1 New Note
   - var item = note || {title: '', text: ''}
-  - var override = note ? '/' + note._id + '?_method=PUT' : ''
-  form(method='POST', action='/notes#{override}')
-    .input-group
-      label(for='title') Title
-      input#title(type='text', name='title', placeholder='Note title', value='#{item.title}')
-    .input-group
-      label(for='text') Text
-      textarea#text(name='text', placeholder='Note text')=item.text
-    .input-group
-      label(for='cat') Category
-      select#cat(name='category')
-        for cat in categories
-          option(value=cat._id)= cat.name
-    .input-group
-      input.btn.btn-default(type='submit', value='Save Note')
+  - var noteid = note ? '/' + note._id : ''
+  - var override = note ? '?_method=PUT' : ''
+  if note
+    h1.text-center Edit Note
+  else
+    h1.text-center New Note
+  form(method='POST', action='/notes#{noteid}#{override}')
+    .form-group
+      label.sr-only(for='title') Title
+      .input-group
+        .input-group-addon &nbsp;&nbsp;&nbsp;&nbsp;Title&nbsp;&nbsp;&nbsp;&nbsp;
+        input#title.form-control(type='text', name='title', value='#{item.title}')
+    .form-group
+      label.sr-only(for='text') Text
+      .input-group
+        .input-group-addon &nbsp;&nbsp;&nbsp;&nbsp;Text&nbsp;&nbsp;&nbsp;&nbsp;
+        textarea#text.form-control(name='text')=item.text
+    .form-group
+      label.sr-only(for='cat') Category
+      .input-group
+        .input-group-addon Category
+        select#cat.form-control(name='category')
+          for cat in categories
+            option(value=cat._id)= cat.name
+    .form-group
+      input.btn.btn-default.btn-dbl(type='submit', value='Save Note')
+      a.btn.btn-default.btn-dbl(href='/notes#{noteid}') Cancel

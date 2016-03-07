@@ -52,7 +52,7 @@ module.exports = {
 }
 
 module.exports.login = passport.authenticate('local', {
-  successRedirect: '/',
+  successRedirect: '/notes',
   failureFlash: 'Email or password incorrect',
   failureRedirect: '/login'
 });
