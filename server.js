@@ -14,11 +14,14 @@ app.use(methodOverride('_method'));
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const SESS_SECRET = process.env.SESS_SECRET || 'DevPasswordYo';
+const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379'
 app.use(session({
   secret: SESS_SECRET,
   resave: false,
   saveUninitialized: true,
-  store: new RedisStore()
+  store: new RedisStore({
+    url: REDIS_URL
+  })
 }));
 
 const passport = require('passport');
