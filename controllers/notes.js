@@ -5,14 +5,14 @@ const Category = require('../models/category');
 
 module.exports = {
   index (req, res) {
-    Note.find({}).sort('-_id').exec((err, notes) => {
+    Note.find({user: req.user._id}).sort('-_id').exec((err, notes) => {
       if (err) throw err;
       res.render('note-index', {notes: notes});
     });
   },
 
   new (req, res) {
-    Category.find({}, (err, categories) => {
+    Category.find({user: req.user._id}, (err, categories) => {
       if (err) throw err;
       res.render('note-new', {categories: categories});
     });
@@ -31,7 +31,7 @@ module.exports = {
   },
 
   edit (req, res) {
-    Category.find({}, (err, categories) => {
+    Category.find({user: req.user._id}, (err, categories) => {
       if (err) throw err;
       res.render('note-new', {note: req.note, categories: categories})
     });

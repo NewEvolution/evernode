@@ -1,12 +1,13 @@
 extends template
 block content
+  - var category = note.category || {_id: '', name: 'None'}
   h1.text-center=note.title
   hr
   p=note.text
   hr
   p.text-center
     strong Category: 
-    a(href='/categories/#{note.category._id}')=note.category.name
+    a(href='/categories/#{category._id}')=category.name
   form(action='/notes/#{note._id}?_method=DELETE', method='POST')
     input.btn.btn-default.btn-dbl(type='submit', value='Delete Note')
     a.btn.btn-default.btn-dbl(href='/notes/#{note._id}/edit') Edit Note

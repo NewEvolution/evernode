@@ -4,7 +4,7 @@ const Category = require('../models/category');
 
 module.exports = {
   index (req, res) {
-    Category.find({}).sort('name').exec((err, categories) => {
+    Category.find({user: req.user._id}).sort('name').exec((err, categories) => {
       if (err) throw err;
       res.render('cat-index', {categories: categories});
     });

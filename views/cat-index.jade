@@ -5,4 +5,5 @@ block content
     for category in categories
       li
         a(href="/categories/#{category._id}")=category.name
-        span : #{category.desc}
+        if category.desc
+          span : #{category.desc}
