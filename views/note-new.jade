@@ -1,6 +1,6 @@
 extends template
 block content
-  - var item = note || {title: '', text: ''}
+  - var item = note || {title: '', text: '', category: {_id: ''}}
   - var noteid = note ? '/' + note._id : ''
   - var override = note ? '?_method=PUT' : ''
   if note
@@ -24,7 +24,10 @@ block content
         .input-group-addon Category
         select#cat.form-control(name='category')
           for cat in categories
-            option(value=cat._id)= cat.name
+            if item.category._id.equals(cat._id)
+              option(value=cat._id selected)=cat.name
+            else
+              option(value=cat._id)=cat.name
     .form-group
       input.btn.btn-default.btn-dbl(type='submit', value='Save Note')
       a.btn.btn-default.btn-dbl(href='/notes#{noteid}') Cancel
