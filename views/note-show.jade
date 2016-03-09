@@ -3,7 +3,16 @@ block content
   - var category = note.category || {_id: '', name: 'None'}
   h1.text-center=note.title
   hr
-  p=note.text
+  if note.text[0] === '-'
+    - var text = note.text.replace(/-/g, '')
+    - var list = text.split('\n')
+    ul.list-unstyled
+      for line in list
+        li
+          input.checkbox(type='checkbox')
+          span.checkline=line
+  else
+    p=note.text
   hr
   p.text-center
     strong Category: 

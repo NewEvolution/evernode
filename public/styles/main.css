@@ -27,4 +27,8 @@ ul {
     margin-top: 2px;
     font-size: 1.2em; }
 
+.struck {
+  color: #999;
+  text-decoration: line-through; }
+
 /*# sourceMappingURL=main.css.map */
