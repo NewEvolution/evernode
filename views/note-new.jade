@@ -17,14 +17,14 @@ block content
       label.sr-only(for='text') Text
       .input-group
         .input-group-addon &nbsp;&nbsp;&nbsp;&nbsp;Text&nbsp;&nbsp;&nbsp;&nbsp;
-        textarea#text.form-control(name='text')=item.text
+        textarea#text.form-control(name='text' placeholder='To create a checklist, start each line with a -')=item.text
     .form-group
       label.sr-only(for='cat') Category
       .input-group
         .input-group-addon Category
         select#cat.form-control(name='category')
           for cat in categories
-            if item.category._id.equals(cat._id)
+            if item.category && item.category._id != '' && item.category._id.equals(cat._id)
               option(value=cat._id selected)=cat.name
             else
               option(value=cat._id)=cat.name
